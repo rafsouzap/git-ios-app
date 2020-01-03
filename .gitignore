@@ -1,0 +1,39 @@
+## Build generated
+build/
+DerivedData/
+
+## Trash
+.DS_Store
+Thumbs.db
+
+## Settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Others
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.xcworkspace
+
+## Obj-C / Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## IntelliJ
+.idea
+*.iml
+
+## Misc
+/Carthage
+/Pods
+/Podfile.lock
