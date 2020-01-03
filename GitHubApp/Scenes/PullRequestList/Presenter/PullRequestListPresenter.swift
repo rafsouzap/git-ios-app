@@ -37,7 +37,12 @@ extension PullRequestListPresenter {
             
             DispatchQueue.main.async {
                 self.view.hideLoading()
-                self.view.reloadTableView()
+                
+                if self.pullRequests.count > 0 {
+                    self.view.reloadTableView()
+                } else {
+                    self.view.showEmptyMessage()
+                }
             }
         }, failure: { fail in
             DispatchQueue.main.async {
@@ -45,35 +50,6 @@ extension PullRequestListPresenter {
                 self.view.showAlertError(title: "Erro", message: fail.description, buttonTitle: "OK")
             }
         })
-    }
-    
-}
-
-// MARK: - Private methods
-extension PullRequestListPresenter {
-    
-    fileprivate func getRepositories(reload: Bool = false) {
-//        self.view.showLoading()
-//        
-//        self.service.getRepositories(page: self.currentPage, success: { result in
-//            let repos = result.compactMap { RepositoryViewModel(repository: $0) }
-//
-//            if reload {
-//                self.repositories = repos
-//            } else {
-//                self.repositories.append(contentsOf: repos)
-//            }
-//
-//            DispatchQueue.main.async {
-//                self.view.hideLoading()
-//                self.view.reloadTableView()
-//            }
-//        }, failure: { fail in
-//            DispatchQueue.main.async {
-//                self.view.hideLoading()
-//                self.view.showAlertError(title: "Erro", message: fail.description, buttonTitle: "OK")
-//            }
-//        })
     }
 
 }

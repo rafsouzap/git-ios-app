@@ -10,5 +10,6 @@ protocol PullRequestListViewProtocol: class {
     func showLoading()
     func hideLoading()
     func reloadTableView()
+    func showEmptyMessage()
     func showAlertError(title: String, message: String, buttonTitle: String)
 }

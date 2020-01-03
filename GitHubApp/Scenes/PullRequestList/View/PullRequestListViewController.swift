@@ -22,6 +22,18 @@ final class PullRequestListViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var emptyMessageLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = UIColor(hexadecimal: 0x628FB8)
+        label.text = "No Pull Requests created"
+        label.alpha = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     var presenter: PullRequestListPresenter?
     
     override func viewDidLoad() {
@@ -72,6 +84,13 @@ extension PullRequestListViewController: PullRequestListViewProtocol {
         self.hideActivityIndicator()
     }
     
+    func showEmptyMessage() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.tableView.alpha = 0
+            self.emptyMessageLabel.alpha = 1
+        }, completion: nil)
+    }
+    
     func reloadTableView() {
         UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve, animations: {
            self.tableView.reloadData()
@@ -84,11 +103,6 @@ extension PullRequestListViewController: PullRequestListViewProtocol {
         self.present(alert, animated: true, completion: nil)
     }
     
-}
-
-// MARK: - Public methods
-extension PullRequestListViewController {
-        
 }
 
 // MARK: - Private methods
@@ -105,12 +119,20 @@ extension PullRequestListViewController {
     
     fileprivate func setupUI() {
         view.addSubview(self.tableView)
+        view.addSubview(self.emptyMessageLabel)
         
         NSLayoutConstraint.activate([
             self.tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             self.tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            self.emptyMessageLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            self.emptyMessageLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            self.emptyMessageLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            self.emptyMessageLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
