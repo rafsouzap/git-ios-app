@@ -36,6 +36,8 @@ final class RepositoryListViewController: UIViewController {
         view.backgroundColor = .white
         
         self.setupUI()
+        self.setupAccesibility()
+        
         self.loadRepositories()
         
         self.title = "Repositories"
@@ -168,4 +170,7 @@ extension RepositoryListViewController {
         ])
     }
     
+    fileprivate func setupAccesibility() {
+        self.accessibilityLanguage = "en-US"
+    }
 }

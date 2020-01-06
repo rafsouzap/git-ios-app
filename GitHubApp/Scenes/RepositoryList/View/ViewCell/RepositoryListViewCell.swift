@@ -25,6 +25,7 @@ final class RepositoryListViewCell: UITableViewCell {
         label.numberOfLines = 2
         label.textColor = UIColor(hexadecimal: 0x6E6E6E)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isAccessibilityElement = false
         return label
     }()
     
@@ -61,6 +62,7 @@ final class RepositoryListViewCell: UITableViewCell {
         imageView.backgroundColor = .lightGray
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isAccessibilityElement = false
         return imageView
     }()
     
@@ -69,6 +71,7 @@ final class RepositoryListViewCell: UITableViewCell {
         imageView.image = UIImage(named: "IconFork")
         imageView.tintColor = UIColor(hexadecimal: 0xDC9124)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isAccessibilityElement = false
         return imageView
     }()
     
@@ -77,6 +80,7 @@ final class RepositoryListViewCell: UITableViewCell {
         imageView.image = UIImage(named: "IconStar")
         imageView.tintColor = UIColor(hexadecimal: 0xDC9124)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isAccessibilityElement = false
         return imageView
     }()
     
@@ -109,6 +113,8 @@ final class RepositoryListViewCell: UITableViewCell {
             guard let avatarImage = image else { return }
             self.avatarImageView.image = avatarImage
         })
+        
+        self.setupAccesibility()
     }
     
     // MARK: - Private methods
@@ -174,6 +180,15 @@ final class RepositoryListViewCell: UITableViewCell {
         ])
         
         layoutIfNeeded()
+    }
+    
+    private func setupAccesibility() {
+        self.accessibilityLanguage = "en-US"
+        self.accessibilityHint = "Double tap to list pull requests to this repository"
+        
+        forksLabel.accessibilityLabel = "\(forksLabel.text ?? "0") forks"
+        starsLabel.accessibilityLabel = "\(starsLabel.text ?? "0") stars"
+        ownerLabel.accessibilityLabel = "Created by \(ownerLabel.text ?? "")"
     }
     
 }

@@ -29,6 +29,7 @@ final class PullRequestListViewController: UIViewController {
         label.textAlignment = .center
         label.textColor = UIColor(hexadecimal: 0x628FB8)
         label.text = "No Pull Requests created"
+        label.accessibilityLanguage = "en-US"
         label.alpha = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

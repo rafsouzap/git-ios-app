@@ -41,6 +41,7 @@ final class PullRequestListViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
         imageView.clipsToBounds = true
+        imageView.isAccessibilityElement = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -72,6 +73,8 @@ final class PullRequestListViewCell: UITableViewCell {
             guard let avatarImage = image else { return }
             self.avatarImageView.image = avatarImage
         })
+        
+        self.setupAccesibility()
     }
     
     // MARK: - Private methods
@@ -114,6 +117,12 @@ final class PullRequestListViewCell: UITableViewCell {
         ])
         
         layoutIfNeeded()
+    }
+    
+    private func setupAccesibility() {
+        self.accessibilityLanguage = "en-US"
+        
+        usernameLabel.accessibilityLabel = "Pull request created by \(usernameLabel.text ?? "")"
     }
     
 }
